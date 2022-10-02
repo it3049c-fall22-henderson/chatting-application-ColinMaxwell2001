@@ -1,6 +1,7 @@
 const nameInput = document.getElementById("my-name-input");
 const myMessage = document.getElementById("my-message");
 const sendButton = document.getElementById("send-button");
+const saveButton = document.getElementById("saveButton");
 const chatBox = document.getElementById("chat");
 
 async function updateMessages() {
@@ -77,6 +78,27 @@ sendButton.addEventListener("click", function(sendButtonClickEvent) {
   sendMessages(sender,message);
   myMessage.value = "";
 });
+
+saveButton.addEventListener("click", function(saveButtonClickEvent) {
+    saveButtonClickEvent.preventDefault();
+
+    if(nameInput.value != "")
+    {
+        myMessage.removeAttribute("disabled");
+    }
+    else
+    {
+        myMessage.setAttribute("disabled", "disabled");
+    }
+
+    localStorage.setItem("name", nameInput.value);
+
+});
+
+function switchModesLightDark() {
+    var element = document.body;
+    element.classList.toggle("darkMode");
+}
 
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
 setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
